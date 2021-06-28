@@ -31,15 +31,16 @@ def compute_metrics(
         'recall': [],
     }
     for idx in range(len(gold_labels[0])):
-        scores_dict['acc'].append(accuracy_score(gold_labels_dict[f'L{idx + 1}'], predictions_dict[f'L{idx + 1}']))
+        scores_dict['acc'].append(
+            accuracy_score(y_true=gold_labels_dict[f'L{idx + 1}'], y_pred=predictions_dict[f'L{idx + 1}']))
         scores_dict['f1'].append(
-            f1_score(gold_labels_dict[f'L{idx + 1}'], predictions_dict[f'L{idx + 1}'], labels=all_classes,
-                     average='weighted'))
+            f1_score(y_true=gold_labels_dict[f'L{idx + 1}'], y_pred=predictions_dict[f'L{idx + 1}'], labels=all_classes,
+                     average='macro'))
         scores_dict['precision'].append(
-            f1_score(gold_labels_dict[f'L{idx + 1}'], predictions_dict[f'L{idx + 1}'], labels=all_classes,
-                     average='weighted'))
+            f1_score(y_true=gold_labels_dict[f'L{idx + 1}'], y_pred=predictions_dict[f'L{idx + 1}'], labels=all_classes,
+                     average='macro'))
         scores_dict['recall'].append(
-            f1_score(gold_labels_dict[f'L{idx + 1}'], predictions_dict[f'L{idx + 1}'], labels=all_classes,
-                     average='weighted'))
+            f1_score(y_true=gold_labels_dict[f'L{idx + 1}'], y_pred=predictions_dict[f'L{idx + 1}'], labels=all_classes,
+                     average='macro'))
 
     return {k: np.mean([v[desired_idx] for desired_idx in desired_label_ids]) for k, v in scores_dict.items()}

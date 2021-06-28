@@ -57,7 +57,8 @@ if __name__ == "__main__":
 
     train_df = load_dataframe(fpath=os.path.join(args.train_data_dir, 'train.csv'))
     val_df = load_dataframe(fpath=os.path.join(args.dev_data_dir, 'dev.csv'))
-    test_df = load_dataframe(fpath=os.path.join(args.test_data_dir, 'test.csv'))
+    # test_df = load_dataframe(fpath=os.path.join(args.test_data_dir, 'test.csv'))
+    test_df = None
 
     """Preprocess data"""
 
@@ -248,7 +249,7 @@ if __name__ == "__main__":
 
     # compute val loss
     best_valid_loss, best_valid_metrics = evaluate(model=model, iterator=data_dict['val_iter'], criterion=criterion,
-                                                   label_fields=data_dict['LABELS'], all_classes=["0", "1"], )
+                                                   label_fields=data_dict['LABELS'], all_classes=["0", "1"], desired_label_ids=desired_label_ids)
     logger.info(
         f'best_val_loss: {best_valid_loss:.3f}'
     )
