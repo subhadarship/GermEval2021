@@ -1,7 +1,7 @@
 from typing import List, Dict
 
 import numpy as np
-from sklearn.metrics import accuracy_score, f1_score
+from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
 
 
 def compute_metrics(
@@ -37,10 +37,12 @@ def compute_metrics(
             f1_score(y_true=gold_labels_dict[f'L{idx + 1}'], y_pred=predictions_dict[f'L{idx + 1}'], labels=all_classes,
                      average='macro'))
         scores_dict['precision'].append(
-            f1_score(y_true=gold_labels_dict[f'L{idx + 1}'], y_pred=predictions_dict[f'L{idx + 1}'], labels=all_classes,
-                     average='macro'))
+            precision_score(y_true=gold_labels_dict[f'L{idx + 1}'], y_pred=predictions_dict[f'L{idx + 1}'],
+                            labels=all_classes,
+                            average='macro'))
         scores_dict['recall'].append(
-            f1_score(y_true=gold_labels_dict[f'L{idx + 1}'], y_pred=predictions_dict[f'L{idx + 1}'], labels=all_classes,
-                     average='macro'))
+            recall_score(y_true=gold_labels_dict[f'L{idx + 1}'], y_pred=predictions_dict[f'L{idx + 1}'],
+                         labels=all_classes,
+                         average='macro'))
 
     return {k: np.mean([v[desired_idx] for desired_idx in desired_label_ids]) for k, v in scores_dict.items()}
