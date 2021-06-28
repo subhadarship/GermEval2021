@@ -75,7 +75,7 @@ if __name__ == "__main__":
             max_vocab_size=None,
             device=device,
         )
-    elif args.model_name in ['bert-base-uncased', 'bert-base-multilingual-cased']:
+    elif args.model_name in ['bert-base-uncased', 'bert-base-multilingual-cased', 'bert-base-german-cased']:
         data_dict = preprocess_bert_data(
             train_df=train_df,
             val_df=val_df,
@@ -117,7 +117,7 @@ if __name__ == "__main__":
             data_dict=data_dict,
             device=device,
         )
-    elif args.model_name in ['bert-base-uncased', 'bert-base-multilingual-cased']:
+    elif args.model_name in ['bert-base-uncased', 'bert-base-multilingual-cased', 'bert-base-german-cased']:
         model_hyperparams_dict = {
             'FC_DIM': args.bert_fc_dim,
         }
@@ -151,7 +151,7 @@ if __name__ == "__main__":
         if args.model_name in ['transformer_enc', 'logistic_regression']:
             logger.info(f'applying xavier initialization of model parameters')
             model.apply(initialize_weights)
-        elif args.model_name in ['bert-base-uncased', 'bert-base-multilingual-cased']:
+        elif args.model_name in ['bert-base-uncased', 'bert-base-multilingual-cased', 'bert-base-german-cased']:
             pass
         else:
             raise NotImplementedError
