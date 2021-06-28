@@ -155,6 +155,12 @@ if __name__ == "__main__":
         else:
             raise NotImplementedError
 
+    # get desired label ids
+    assert len(set(args.label_col_names.split(',')).union(set(args.eval_label_col_names.split(',')))) == len(
+        set(args.label_col_names.split(',')))
+    desired_label_ids = [args.label_col_names.split(',').index(eval_label_col_name) for eval_label_col_name in
+                         args.eval_label_col_names.split(',')]
+
     # criterion
     criterion = nn.CrossEntropyLoss()
 
@@ -186,7 +192,8 @@ if __name__ == "__main__":
             iterator=data_dict['val_iter'],
             criterion=criterion,
             label_fields=data_dict['LABELS'],
-            all_classes=["yes", "no"],
+            all_classes=["0", "1"],
+            desired_label_ids=desired_label_ids,
         )
         valid_losses.append(valid_loss)
         valid_f1s.append(valid_metrics['f1'])
@@ -200,7 +207,7 @@ if __name__ == "__main__":
             f'train_loss: {train_loss:.3f} | '
             f'val_loss: {valid_loss:.3f}'
         )
-        logger.info(f'📣 val metrics 📣 {valid_metrics}')
+        logger.info(f'🔥 val metrics 🔥 {valid_metrics}')
 
         if valid_metrics['f1'] > best_valid_f1:
             logger.info('\t--Found new best val f1')
@@ -241,18 +248,19 @@ if __name__ == "__main__":
 
     # compute val loss
     best_valid_loss, best_valid_metrics = evaluate(model=model, iterator=data_dict['val_iter'], criterion=criterion,
-                                                   label_fields=data_dict['LABELS'], all_classes=["yes", "no"], )
+                                                   label_fields=data_dict['LABELS'], all_classes=["0", "1"], )
     logger.info(
         f'best_val_loss: {best_valid_loss:.3f}'
     )
-    logger.info(f'📣 best validation metrics 📣 {best_valid_metrics}')
+    logger.info(f'🔥 best validation metrics 🔥 {best_valid_metrics}')
 
     if data_dict['test_iter'] is not None:
         # compute test loss
         logger.info(f'🔥 start testing..')
         test_loss, test_metrics = evaluate(model=model, iterator=data_dict['test_iter'], criterion=criterion,
-                                           label_fields=data_dict['LABELS'], all_classes=["yes", "no"], )
+                                           label_fields=data_dict['LABELS'], all_classes=["0", "1"],
+                                           desired_label_ids=desired_label_ids)
         logger.info(
             f'test_loss: {test_loss:.3f}'
         )
-        logger.info(f'📣 test metrics 📣 {test_metrics}')
+        logger.info(f'🔥 test metrics 🔥 {test_metrics}')
