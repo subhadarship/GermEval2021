@@ -1,0 +1,493 @@
+06/29/2021 09:51:43 - INFO - __main__ -   
+
+*****************
+***RUN STARTED***
+*****************
+
+06/29/2021 09:51:43 - INFO - __main__ -   args
+-----------------------------------------------------------------------------------------
+	train_data_dir: ../data/cross_validation/fold_B
+	dev_data_dir: ../data/cross_validation/fold_B
+	test_data_dir: None
+	label_col_names: Sub3_FactClaiming
+	eval_label_col_names: Sub3_FactClaiming
+	batch_size: 1024
+	max_vocab_size: None
+	tokenization: bert-base-multilingual-cased
+	hid_dim: 128
+	num_enc_layers: 3
+	num_enc_heads: 8
+	enc_pf_dim: 256
+	enc_dropout: 0.1
+	fc_dim: 64
+	bert_fc_dim: 256
+	logistic_regression_hid_dim: 128
+	logistic_regression_dropout: 0.1
+	log_file_path: ../logs_cv/cv_fold_B_monotask/bert-base-multilingual-cased/trg_fc256_lr0.005_frozen.txt
+	random_seed: 123
+	lr: 0.005
+	clip: 1.0
+	max_epochs: 999
+	model_dir: /mnt/backup/panda/GermEval2021/models/cv_fold_B_monotask/bert-base-multilingual-cased/trg_fc256_lr0.005_frozen
+	no_xavier_initialization: False
+	early_stopping_patience: 10
+	model_name: bert-base-multilingual-cased
+	freeze_bert: True
+-----------------------------------------------------------------------------------------
+
+06/29/2021 09:51:44 - INFO - __main__ -   device: cuda
+06/29/2021 09:51:44 - INFO - data_utils.preprocess_bert -   tokenization: bert-base-multilingual-cased
+06/29/2021 09:51:45 - WARNING - data_utils.bert_data -   trimming sentence 110 of length 1550 to 512 tokens (trimmed tokens include [CLS] and [SEP] tokens)
+06/29/2021 09:51:45 - WARNING - data_utils.bert_data -   trimming sentence 898 of length 1645 to 512 tokens (trimmed tokens include [CLS] and [SEP] tokens)
+06/29/2021 09:51:45 - WARNING - data_utils.bert_data -   trimming sentence 1248 of length 2491 to 512 tokens (trimmed tokens include [CLS] and [SEP] tokens)
+06/29/2021 09:51:45 - WARNING - data_utils.bert_data -   trimming sentence 1808 of length 516 to 512 tokens (trimmed tokens include [CLS] and [SEP] tokens)
+06/29/2021 09:51:46 - WARNING - data_utils.bert_data -   trimming sentence 1969 of length 752 to 512 tokens (trimmed tokens include [CLS] and [SEP] tokens)
+06/29/2021 09:51:46 - WARNING - data_utils.bert_data -   trimming sentence 39 of length 2626 to 512 tokens (trimmed tokens include [CLS] and [SEP] tokens)
+06/29/2021 09:51:46 - INFO - data_utils.preprocess_bert -   num train samples: 2596
+06/29/2021 09:51:46 - INFO - data_utils.preprocess_bert -   num val samples: 648
+06/29/2021 09:51:46 - INFO - data_utils.preprocess_bert -   num test samples: None
+06/29/2021 09:51:46 - INFO - data_utils.preprocess_bert -   train sentence max len: 512
+06/29/2021 09:51:46 - INFO - data_utils.preprocess_bert -   val sentence max len: 512
+06/29/2021 09:51:47 - INFO - data_utils.preprocess_bert -   train OOV: 472 (0.36%) out of 131594 running tokens are OOV
+06/29/2021 09:51:47 - INFO - data_utils.preprocess_bert -   val OOV: 145 (0.45%) out of 32005 running tokens are OOV
+06/29/2021 09:51:47 - INFO - data_utils.preprocess_bert -   look at some train samples 👀
+06/29/2021 09:51:47 - INFO - data_utils.preprocess_bert -   sample idx: 0, original text: @USER beim korrupten Erdogan oder hier?, text ids: [101, 137, 10808, 24093, 12632, 33705, 46791, 10136, 10915, 62039, 10206, 10760, 13329, 136, 102], original labels: 1, label ids: [[1]]
+06/29/2021 09:51:47 - INFO - data_utils.preprocess_bert -   sample idx: 1, original text: Mietpreisbremse? 2 Stühle und ein Tisch in die Butze, wird als möbliert vermietet. Mietpreisbremse greift nicht. Ich habe eine zeitlang Mietangebote über 15 Euro kalt (wenn offensichtlich nicht modernisiert) zur Anzeige gebracht.... Habe die Anbieter auch darüber informiert. Von Staatsanwalt und Wohnungsant nur Einstellungen gekommen. Is ja nicht so als hätte ich mir irgend etwas erwartet... Aber irgend etwas will ich tun... Erbsen unter die Matratze... Etwas... HERR GOTT! Oft 20,- kalt in einer Stadt mit niederem Durchschnittseinkommen., text ids: [101, 19803, 10308, 27516, 13724, 71799, 136, 123, 10838, 94284, 10130, 10290, 29033, 12044, 10106, 10128, 16976, 10870, 117, 10790, 10223, 11522, 48850, 11605, 16719, 18485, 12392, 119, 19803, 10308, 27516, 13724, 71799, 30518, 11998, 12961, 10726, 119, 21023, 21404, 10359, 10941, 10486, 17356, 19803, 18451, 10525, 25022, 10112, 10848, 10208, 17526, 32383, 113, 16082, 84646, 65381, 10726, 84984, 56109, 114, 10736, 10313, 53228, 10525, 28989, 119, 119, 119, 119, 13740, 11044, 10128, 10313, 93760, 10165, 10515, 35159, 26978, 76936, 11605, 119, 12273, 28435, 14434, 57710, 10130, 79427, 31271, 11354, 104731, 10136, 70195, 119, 12034, 10201, 10726, 10380, 10223, 43667, 12979, 36077, 10478, 62589, 23942, 10163, 102775, 119, 119, 119, 52567, 10478, 62589, 23942, 11337, 12979, 53100, 119, 119, 119, 10915, 19528, 10136, 11124, 10128, 57471, 12553, 10870, 119, 119, 119, 76195, 10107, 119, 119, 119, 145, 24093, 11273, 41525, 11090, 11090, 106, 12610, 10123, 10197, 117, 118, 32383, 10106, 10599, 11878, 10221, 63694, 10451, 17400, 51577, 83866, 20271, 119, 102], original labels: 1, label ids: [[1]]
+06/29/2021 09:51:47 - INFO - data_utils.preprocess_bert -   sample idx: 2, original text: Ach so, ich trage auch keine Jeans, da bin ich sicher schon in den 80ern indoktriniert worden ...VOM ISLAM. 😂, text ids: [101, 138, 10269, 10380, 117, 12979, 11264, 10525, 10515, 14618, 10766, 10107, 117, 10143, 16292, 12979, 78963, 16363, 10106, 10140, 10832, 13979, 74502, 12495, 24387, 11605, 11425, 119, 119, 119, 159, 37079, 40214, 44376, 11517, 119, 100, 102], original labels: 0, label ids: [[0]]
+06/29/2021 09:51:47 - INFO - data_utils.preprocess_bert -   sample idx: 3, original text: @USER Sie meinen, so wie 1933? Intessant 🤔, text ids: [101, 137, 10808, 24093, 11583, 99864, 10115, 117, 10380, 10953, 11247, 136, 81687, 18621, 10368, 100, 102], original labels: 0, label ids: [[0]]
+06/29/2021 09:51:47 - INFO - data_utils.preprocess_bert -   sample idx: 4, original text: Jeder Motorrad fahrer sollte automatisch Organspender werden., text ids: [101, 105818, 19440, 18599, 12211, 50935, 17799, 51055, 72154, 54609, 27323, 10615, 119, 102], original labels: 0, label ids: [[0]]
+06/29/2021 09:51:49 - INFO - data_utils.preprocess_bert -   there are nearly 143 batches in an epoch
+06/29/2021 09:51:52 - INFO - __main__ -   model
+-----------------------------------------------------------------------------------------
+MultitaskBertClassificationModel(
+  (encoder): BERT(
+    (bert): BertModel(
+      (embeddings): BertEmbeddings(
+        (word_embeddings): Embedding(119547, 768, padding_idx=0)
+        (position_embeddings): Embedding(512, 768)
+        (token_type_embeddings): Embedding(2, 768)
+        (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+        (dropout): Dropout(p=0.1)
+      )
+      (encoder): BertEncoder(
+        (layer): ModuleList(
+          (0): BertLayer(
+            (attention): BertAttention(
+              (self): BertSelfAttention(
+                (query): Linear(in_features=768, out_features=768, bias=True)
+                (key): Linear(in_features=768, out_features=768, bias=True)
+                (value): Linear(in_features=768, out_features=768, bias=True)
+                (dropout): Dropout(p=0.1)
+              )
+              (output): BertSelfOutput(
+                (dense): Linear(in_features=768, out_features=768, bias=True)
+                (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+                (dropout): Dropout(p=0.1)
+              )
+            )
+            (intermediate): BertIntermediate(
+              (dense): Linear(in_features=768, out_features=3072, bias=True)
+            )
+            (output): BertOutput(
+              (dense): Linear(in_features=3072, out_features=768, bias=True)
+              (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (1): BertLayer(
+            (attention): BertAttention(
+              (self): BertSelfAttention(
+                (query): Linear(in_features=768, out_features=768, bias=True)
+                (key): Linear(in_features=768, out_features=768, bias=True)
+                (value): Linear(in_features=768, out_features=768, bias=True)
+                (dropout): Dropout(p=0.1)
+              )
+              (output): BertSelfOutput(
+                (dense): Linear(in_features=768, out_features=768, bias=True)
+                (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+                (dropout): Dropout(p=0.1)
+              )
+            )
+            (intermediate): BertIntermediate(
+              (dense): Linear(in_features=768, out_features=3072, bias=True)
+            )
+            (output): BertOutput(
+              (dense): Linear(in_features=3072, out_features=768, bias=True)
+              (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (2): BertLayer(
+            (attention): BertAttention(
+              (self): BertSelfAttention(
+                (query): Linear(in_features=768, out_features=768, bias=True)
+                (key): Linear(in_features=768, out_features=768, bias=True)
+                (value): Linear(in_features=768, out_features=768, bias=True)
+                (dropout): Dropout(p=0.1)
+              )
+              (output): BertSelfOutput(
+                (dense): Linear(in_features=768, out_features=768, bias=True)
+                (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+                (dropout): Dropout(p=0.1)
+              )
+            )
+            (intermediate): BertIntermediate(
+              (dense): Linear(in_features=768, out_features=3072, bias=True)
+            )
+            (output): BertOutput(
+              (dense): Linear(in_features=3072, out_features=768, bias=True)
+              (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (3): BertLayer(
+            (attention): BertAttention(
+              (self): BertSelfAttention(
+                (query): Linear(in_features=768, out_features=768, bias=True)
+                (key): Linear(in_features=768, out_features=768, bias=True)
+                (value): Linear(in_features=768, out_features=768, bias=True)
+                (dropout): Dropout(p=0.1)
+              )
+              (output): BertSelfOutput(
+                (dense): Linear(in_features=768, out_features=768, bias=True)
+                (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+                (dropout): Dropout(p=0.1)
+              )
+            )
+            (intermediate): BertIntermediate(
+              (dense): Linear(in_features=768, out_features=3072, bias=True)
+            )
+            (output): BertOutput(
+              (dense): Linear(in_features=3072, out_features=768, bias=True)
+              (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (4): BertLayer(
+            (attention): BertAttention(
+              (self): BertSelfAttention(
+                (query): Linear(in_features=768, out_features=768, bias=True)
+                (key): Linear(in_features=768, out_features=768, bias=True)
+                (value): Linear(in_features=768, out_features=768, bias=True)
+                (dropout): Dropout(p=0.1)
+              )
+              (output): BertSelfOutput(
+                (dense): Linear(in_features=768, out_features=768, bias=True)
+                (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+                (dropout): Dropout(p=0.1)
+              )
+            )
+            (intermediate): BertIntermediate(
+              (dense): Linear(in_features=768, out_features=3072, bias=True)
+            )
+            (output): BertOutput(
+              (dense): Linear(in_features=3072, out_features=768, bias=True)
+              (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (5): BertLayer(
+            (attention): BertAttention(
+              (self): BertSelfAttention(
+                (query): Linear(in_features=768, out_features=768, bias=True)
+                (key): Linear(in_features=768, out_features=768, bias=True)
+                (value): Linear(in_features=768, out_features=768, bias=True)
+                (dropout): Dropout(p=0.1)
+              )
+              (output): BertSelfOutput(
+                (dense): Linear(in_features=768, out_features=768, bias=True)
+                (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+                (dropout): Dropout(p=0.1)
+              )
+            )
+            (intermediate): BertIntermediate(
+              (dense): Linear(in_features=768, out_features=3072, bias=True)
+            )
+            (output): BertOutput(
+              (dense): Linear(in_features=3072, out_features=768, bias=True)
+              (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (6): BertLayer(
+            (attention): BertAttention(
+              (self): BertSelfAttention(
+                (query): Linear(in_features=768, out_features=768, bias=True)
+                (key): Linear(in_features=768, out_features=768, bias=True)
+                (value): Linear(in_features=768, out_features=768, bias=True)
+                (dropout): Dropout(p=0.1)
+              )
+              (output): BertSelfOutput(
+                (dense): Linear(in_features=768, out_features=768, bias=True)
+                (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+                (dropout): Dropout(p=0.1)
+              )
+            )
+            (intermediate): BertIntermediate(
+              (dense): Linear(in_features=768, out_features=3072, bias=True)
+            )
+            (output): BertOutput(
+              (dense): Linear(in_features=3072, out_features=768, bias=True)
+              (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (7): BertLayer(
+            (attention): BertAttention(
+              (self): BertSelfAttention(
+                (query): Linear(in_features=768, out_features=768, bias=True)
+                (key): Linear(in_features=768, out_features=768, bias=True)
+                (value): Linear(in_features=768, out_features=768, bias=True)
+                (dropout): Dropout(p=0.1)
+              )
+              (output): BertSelfOutput(
+                (dense): Linear(in_features=768, out_features=768, bias=True)
+                (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+                (dropout): Dropout(p=0.1)
+              )
+            )
+            (intermediate): BertIntermediate(
+              (dense): Linear(in_features=768, out_features=3072, bias=True)
+            )
+            (output): BertOutput(
+              (dense): Linear(in_features=3072, out_features=768, bias=True)
+              (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (8): BertLayer(
+            (attention): BertAttention(
+              (self): BertSelfAttention(
+                (query): Linear(in_features=768, out_features=768, bias=True)
+                (key): Linear(in_features=768, out_features=768, bias=True)
+                (value): Linear(in_features=768, out_features=768, bias=True)
+                (dropout): Dropout(p=0.1)
+              )
+              (output): BertSelfOutput(
+                (dense): Linear(in_features=768, out_features=768, bias=True)
+                (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+                (dropout): Dropout(p=0.1)
+              )
+            )
+            (intermediate): BertIntermediate(
+              (dense): Linear(in_features=768, out_features=3072, bias=True)
+            )
+            (output): BertOutput(
+              (dense): Linear(in_features=3072, out_features=768, bias=True)
+              (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (9): BertLayer(
+            (attention): BertAttention(
+              (self): BertSelfAttention(
+                (query): Linear(in_features=768, out_features=768, bias=True)
+                (key): Linear(in_features=768, out_features=768, bias=True)
+                (value): Linear(in_features=768, out_features=768, bias=True)
+                (dropout): Dropout(p=0.1)
+              )
+              (output): BertSelfOutput(
+                (dense): Linear(in_features=768, out_features=768, bias=True)
+                (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+                (dropout): Dropout(p=0.1)
+              )
+            )
+            (intermediate): BertIntermediate(
+              (dense): Linear(in_features=768, out_features=3072, bias=True)
+            )
+            (output): BertOutput(
+              (dense): Linear(in_features=3072, out_features=768, bias=True)
+              (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (10): BertLayer(
+            (attention): BertAttention(
+              (self): BertSelfAttention(
+                (query): Linear(in_features=768, out_features=768, bias=True)
+                (key): Linear(in_features=768, out_features=768, bias=True)
+                (value): Linear(in_features=768, out_features=768, bias=True)
+                (dropout): Dropout(p=0.1)
+              )
+              (output): BertSelfOutput(
+                (dense): Linear(in_features=768, out_features=768, bias=True)
+                (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+                (dropout): Dropout(p=0.1)
+              )
+            )
+            (intermediate): BertIntermediate(
+              (dense): Linear(in_features=768, out_features=3072, bias=True)
+            )
+            (output): BertOutput(
+              (dense): Linear(in_features=3072, out_features=768, bias=True)
+              (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (11): BertLayer(
+            (attention): BertAttention(
+              (self): BertSelfAttention(
+                (query): Linear(in_features=768, out_features=768, bias=True)
+                (key): Linear(in_features=768, out_features=768, bias=True)
+                (value): Linear(in_features=768, out_features=768, bias=True)
+                (dropout): Dropout(p=0.1)
+              )
+              (output): BertSelfOutput(
+                (dense): Linear(in_features=768, out_features=768, bias=True)
+                (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+                (dropout): Dropout(p=0.1)
+              )
+            )
+            (intermediate): BertIntermediate(
+              (dense): Linear(in_features=768, out_features=3072, bias=True)
+            )
+            (output): BertOutput(
+              (dense): Linear(in_features=3072, out_features=768, bias=True)
+              (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1)
+            )
+          )
+        )
+      )
+      (pooler): BertPooler(
+        (dense): Linear(in_features=768, out_features=768, bias=True)
+        (activation): Tanh()
+      )
+    )
+  )
+  (fc): Linear(in_features=768, out_features=256, bias=True)
+  (clfs): ModuleList(
+    (0): Linear(in_features=256, out_features=2, bias=True)
+  )
+)
+-----------------------------------------------------------------------------------------
+
+06/29/2021 09:51:52 - INFO - __main__ -   the model has 197,378 trainable parameters
+06/29/2021 09:51:52 - INFO - __main__ -   🌋  starting training..
+06/29/2021 09:52:03 - INFO - training_utils.train_loop -   postprocessing targets..
+06/29/2021 09:52:03 - INFO - training_utils.train_loop -   postprocessing predictions..
+06/29/2021 09:52:03 - INFO - __main__ -   Epoch: 0001 | Time: 0m_11s | train_loss: 0.629 | val_loss: 1.505
+06/29/2021 09:52:03 - INFO - __main__ -   🔥 val metrics 🔥 {'acc': 0.41512345679012347, 'f1': 0.376643154653881, 'precision': 0.6401398520905873, 'recall': 0.5517204757858963}
+06/29/2021 09:52:03 - INFO - __main__ -   	--Found new best val f1
+06/29/2021 09:52:04 - INFO - __main__ -   	current patience value: 0/10
+06/29/2021 09:52:16 - INFO - training_utils.train_loop -   postprocessing targets..
+06/29/2021 09:52:16 - INFO - training_utils.train_loop -   postprocessing predictions..
+06/29/2021 09:52:16 - INFO - __main__ -   Epoch: 0002 | Time: 0m_11s | train_loss: 0.595 | val_loss: 0.688
+06/29/2021 09:52:16 - INFO - __main__ -   🔥 val metrics 🔥 {'acc': 0.6589506172839507, 'f1': 0.6548065264918781, 'precision': 0.677134771434347, 'recall': 0.6954333050127443}
+06/29/2021 09:52:16 - INFO - __main__ -   	--Found new best val f1
+06/29/2021 09:52:23 - INFO - __main__ -   	current patience value: 0/10
+06/29/2021 09:52:35 - INFO - training_utils.train_loop -   postprocessing targets..
+06/29/2021 09:52:35 - INFO - training_utils.train_loop -   postprocessing predictions..
+06/29/2021 09:52:35 - INFO - __main__ -   Epoch: 0003 | Time: 0m_11s | train_loss: 0.547 | val_loss: 0.661
+06/29/2021 09:52:35 - INFO - __main__ -   🔥 val metrics 🔥 {'acc': 0.6527777777777778, 'f1': 0.642667202584168, 'precision': 0.6503368238511305, 'recall': 0.6675658453695836}
+06/29/2021 09:52:35 - INFO - __main__ -   	current patience value: 1/10
+06/29/2021 09:52:46 - INFO - training_utils.train_loop -   postprocessing targets..
+06/29/2021 09:52:46 - INFO - training_utils.train_loop -   postprocessing predictions..
+06/29/2021 09:52:46 - INFO - __main__ -   Epoch: 0004 | Time: 0m_11s | train_loss: 0.551 | val_loss: 0.527
+06/29/2021 09:52:46 - INFO - __main__ -   🔥 val metrics 🔥 {'acc': 0.75, 'f1': 0.71875, 'precision': 0.7209191621949109, 'recall': 0.7168649107901444}
+06/29/2021 09:52:46 - INFO - __main__ -   	--Found new best val f1
+06/29/2021 09:52:53 - INFO - __main__ -   	current patience value: 0/10
+06/29/2021 09:53:04 - INFO - training_utils.train_loop -   postprocessing targets..
+06/29/2021 09:53:04 - INFO - training_utils.train_loop -   postprocessing predictions..
+06/29/2021 09:53:04 - INFO - __main__ -   Epoch: 0005 | Time: 0m_11s | train_loss: 0.505 | val_loss: 0.824
+06/29/2021 09:53:04 - INFO - __main__ -   🔥 val metrics 🔥 {'acc': 0.6080246913580247, 'f1': 0.6079649390243902, 'precision': 0.6705513784461152, 'recall': 0.6734494477485132}
+06/29/2021 09:53:04 - INFO - __main__ -   	current patience value: 1/10
+06/29/2021 09:53:16 - INFO - training_utils.train_loop -   postprocessing targets..
+06/29/2021 09:53:16 - INFO - training_utils.train_loop -   postprocessing predictions..
+06/29/2021 09:53:16 - INFO - __main__ -   Epoch: 0006 | Time: 0m_11s | train_loss: 0.528 | val_loss: 0.623
+06/29/2021 09:53:16 - INFO - __main__ -   🔥 val metrics 🔥 {'acc': 0.720679012345679, 'f1': 0.7018114330024026, 'precision': 0.698019606877186, 'recall': 0.713445199660153}
+06/29/2021 09:53:16 - INFO - __main__ -   	current patience value: 2/10
+06/29/2021 09:53:27 - INFO - training_utils.train_loop -   postprocessing targets..
+06/29/2021 09:53:27 - INFO - training_utils.train_loop -   postprocessing predictions..
+06/29/2021 09:53:27 - INFO - __main__ -   Epoch: 0007 | Time: 0m_11s | train_loss: 0.512 | val_loss: 0.775
+06/29/2021 09:53:27 - INFO - __main__ -   🔥 val metrics 🔥 {'acc': 0.6126543209876543, 'f1': 0.6124983620617772, 'precision': 0.6712394642949481, 'recall': 0.6758496176720475}
+06/29/2021 09:53:27 - INFO - __main__ -   	current patience value: 3/10
+06/29/2021 09:53:39 - INFO - training_utils.train_loop -   postprocessing targets..
+06/29/2021 09:53:39 - INFO - training_utils.train_loop -   postprocessing predictions..
+06/29/2021 09:53:39 - INFO - __main__ -   Epoch: 0008 | Time: 0m_11s | train_loss: 0.526 | val_loss: 0.604
+06/29/2021 09:53:39 - INFO - __main__ -   🔥 val metrics 🔥 {'acc': 0.6959876543209876, 'f1': 0.6864528964594054, 'precision': 0.6916773916773917, 'recall': 0.7135301614273577}
+06/29/2021 09:53:39 - INFO - __main__ -   	current patience value: 4/10
+06/29/2021 09:53:50 - INFO - training_utils.train_loop -   postprocessing targets..
+06/29/2021 09:53:50 - INFO - training_utils.train_loop -   postprocessing predictions..
+06/29/2021 09:53:50 - INFO - __main__ -   Epoch: 0009 | Time: 0m_11s | train_loss: 0.525 | val_loss: 0.694
+06/29/2021 09:53:50 - INFO - __main__ -   🔥 val metrics 🔥 {'acc': 0.6496913580246914, 'f1': 0.6471494126593089, 'precision': 0.6780355837192298, 'recall': 0.693946474086661}
+06/29/2021 09:53:50 - INFO - __main__ -   	current patience value: 5/10
+06/29/2021 09:54:02 - INFO - training_utils.train_loop -   postprocessing targets..
+06/29/2021 09:54:02 - INFO - training_utils.train_loop -   postprocessing predictions..
+06/29/2021 09:54:02 - INFO - __main__ -   Epoch: 0010 | Time: 0m_11s | train_loss: 0.512 | val_loss: 0.869
+06/29/2021 09:54:02 - INFO - __main__ -   🔥 val metrics 🔥 {'acc': 0.5339506172839507, 'f1': 0.5293597044789904, 'precision': 0.6602564102564102, 'recall': 0.6306287170773152}
+06/29/2021 09:54:02 - INFO - __main__ -   	current patience value: 6/10
+06/29/2021 09:54:13 - INFO - training_utils.train_loop -   postprocessing targets..
+06/29/2021 09:54:13 - INFO - training_utils.train_loop -   postprocessing predictions..
+06/29/2021 09:54:13 - INFO - __main__ -   Epoch: 0011 | Time: 0m_11s | train_loss: 0.507 | val_loss: 0.514
+06/29/2021 09:54:13 - INFO - __main__ -   🔥 val metrics 🔥 {'acc': 0.7654320987654321, 'f1': 0.7309440559440559, 'precision': 0.7393895611341882, 'recall': 0.7252336448598131}
+06/29/2021 09:54:13 - INFO - __main__ -   	--Found new best val f1
+06/29/2021 09:54:23 - INFO - __main__ -   	current patience value: 0/10
+06/29/2021 09:54:34 - INFO - training_utils.train_loop -   postprocessing targets..
+06/29/2021 09:54:34 - INFO - training_utils.train_loop -   postprocessing predictions..
+06/29/2021 09:54:34 - INFO - __main__ -   Epoch: 0012 | Time: 0m_11s | train_loss: 0.509 | val_loss: 0.528
+06/29/2021 09:54:34 - INFO - __main__ -   🔥 val metrics 🔥 {'acc': 0.7608024691358025, 'f1': 0.6971916971916972, 'precision': 0.7560574069425783, 'recall': 0.6841758708581138}
+06/29/2021 09:54:34 - INFO - __main__ -   	current patience value: 1/10
+06/29/2021 09:54:46 - INFO - training_utils.train_loop -   postprocessing targets..
+06/29/2021 09:54:46 - INFO - training_utils.train_loop -   postprocessing predictions..
+06/29/2021 09:54:46 - INFO - __main__ -   Epoch: 0013 | Time: 0m_11s | train_loss: 0.478 | val_loss: 0.544
+06/29/2021 09:54:46 - INFO - __main__ -   🔥 val metrics 🔥 {'acc': 0.7530864197530864, 'f1': 0.7314323607427056, 'precision': 0.7273169939944815, 'recall': 0.7379779099405268}
+06/29/2021 09:54:46 - INFO - __main__ -   	--Found new best val f1
+06/29/2021 09:54:54 - INFO - __main__ -   	current patience value: 0/10
+06/29/2021 09:55:05 - INFO - training_utils.train_loop -   postprocessing targets..
+06/29/2021 09:55:05 - INFO - training_utils.train_loop -   postprocessing predictions..
+06/29/2021 09:55:05 - INFO - __main__ -   Epoch: 0014 | Time: 0m_11s | train_loss: 0.502 | val_loss: 0.581
+06/29/2021 09:55:05 - INFO - __main__ -   🔥 val metrics 🔥 {'acc': 0.7129629629629629, 'f1': 0.6953039679650528, 'precision': 0.6921542553191489, 'recall': 0.7087085811384877}
+06/29/2021 09:55:05 - INFO - __main__ -   	current patience value: 1/10
+06/29/2021 09:55:16 - INFO - training_utils.train_loop -   postprocessing targets..
+06/29/2021 09:55:16 - INFO - training_utils.train_loop -   postprocessing predictions..
+06/29/2021 09:55:16 - INFO - __main__ -   Epoch: 0015 | Time: 0m_11s | train_loss: 0.482 | val_loss: 0.616
+06/29/2021 09:55:16 - INFO - __main__ -   🔥 val metrics 🔥 {'acc': 0.6944444444444444, 'f1': 0.6820380650277558, 'precision': 0.6835632183908046, 'recall': 0.7035259133389975}
+06/29/2021 09:55:16 - INFO - __main__ -   	current patience value: 2/10
+06/29/2021 09:55:28 - INFO - training_utils.train_loop -   postprocessing targets..
+06/29/2021 09:55:28 - INFO - training_utils.train_loop -   postprocessing predictions..
+06/29/2021 09:55:28 - INFO - __main__ -   Epoch: 0016 | Time: 0m_11s | train_loss: 0.496 | val_loss: 0.530
+06/29/2021 09:55:28 - INFO - __main__ -   🔥 val metrics 🔥 {'acc': 0.7638888888888888, 'f1': 0.7267126629417586, 'precision': 0.7384064737005913, 'recall': 0.7196474086661002}
+06/29/2021 09:55:28 - INFO - __main__ -   	current patience value: 3/10
+06/29/2021 09:55:40 - INFO - training_utils.train_loop -   postprocessing targets..
+06/29/2021 09:55:40 - INFO - training_utils.train_loop -   postprocessing predictions..
+06/29/2021 09:55:40 - INFO - __main__ -   Epoch: 0017 | Time: 0m_11s | train_loss: 0.481 | val_loss: 0.525
+06/29/2021 09:55:40 - INFO - __main__ -   🔥 val metrics 🔥 {'acc': 0.7638888888888888, 'f1': 0.7138395730568632, 'precision': 0.7467082646879499, 'recall': 0.7019753610875106}
+06/29/2021 09:55:40 - INFO - __main__ -   	current patience value: 4/10
+06/29/2021 09:55:51 - INFO - training_utils.train_loop -   postprocessing targets..
+06/29/2021 09:55:51 - INFO - training_utils.train_loop -   postprocessing predictions..
+06/29/2021 09:55:51 - INFO - __main__ -   Epoch: 0018 | Time: 0m_11s | train_loss: 0.465 | val_loss: 0.531
+06/29/2021 09:55:51 - INFO - __main__ -   🔥 val metrics 🔥 {'acc': 0.7654320987654321, 'f1': 0.7161531279178338, 'precision': 0.748411263239473, 'recall': 0.7042480883602379}
+06/29/2021 09:55:51 - INFO - __main__ -   	current patience value: 5/10
+06/29/2021 09:56:03 - INFO - training_utils.train_loop -   postprocessing targets..
+06/29/2021 09:56:03 - INFO - training_utils.train_loop -   postprocessing predictions..
+06/29/2021 09:56:03 - INFO - __main__ -   Epoch: 0019 | Time: 0m_11s | train_loss: 0.457 | val_loss: 0.519
+06/29/2021 09:56:03 - INFO - __main__ -   🔥 val metrics 🔥 {'acc': 0.7654320987654321, 'f1': 0.7274146233464327, 'precision': 0.7407484988130149, 'recall': 0.7197111299915038}
+06/29/2021 09:56:03 - INFO - __main__ -   	current patience value: 6/10
+06/29/2021 09:56:14 - INFO - training_utils.train_loop -   postprocessing targets..
+06/29/2021 09:56:14 - INFO - training_utils.train_loop -   postprocessing predictions..
+06/29/2021 09:56:14 - INFO - __main__ -   Epoch: 0020 | Time: 0m_11s | train_loss: 0.481 | val_loss: 0.546
+06/29/2021 09:56:14 - INFO - __main__ -   🔥 val metrics 🔥 {'acc': 0.7407407407407407, 'f1': 0.7055565172234723, 'precision': 0.7101218865924748, 'recall': 0.7021240441801189}
+06/29/2021 09:56:14 - INFO - __main__ -   	current patience value: 7/10
+06/29/2021 09:56:26 - INFO - training_utils.train_loop -   postprocessing targets..
+06/29/2021 09:56:26 - INFO - training_utils.train_loop -   postprocessing predictions..
+06/29/2021 09:56:26 - INFO - __main__ -   Epoch: 0021 | Time: 0m_11s | train_loss: 0.458 | val_loss: 0.575
+06/29/2021 09:56:26 - INFO - __main__ -   🔥 val metrics 🔥 {'acc': 0.7376543209876543, 'f1': 0.7140988507894983, 'precision': 0.7105198876358751, 'recall': 0.7196686491079014}
+06/29/2021 09:56:26 - INFO - __main__ -   	current patience value: 8/10
+06/29/2021 09:56:37 - INFO - training_utils.train_loop -   postprocessing targets..
+06/29/2021 09:56:37 - INFO - training_utils.train_loop -   postprocessing predictions..
+06/29/2021 09:56:37 - INFO - __main__ -   Epoch: 0022 | Time: 0m_11s | train_loss: 0.452 | val_loss: 0.584
+06/29/2021 09:56:37 - INFO - __main__ -   🔥 val metrics 🔥 {'acc': 0.75, 'f1': 0.7206628987450905, 'precision': 0.7211649242585876, 'recall': 0.7201784197111301}
+06/29/2021 09:56:37 - INFO - __main__ -   	current patience value: 9/10
+06/29/2021 09:56:49 - INFO - training_utils.train_loop -   postprocessing targets..
+06/29/2021 09:56:49 - INFO - training_utils.train_loop -   postprocessing predictions..
+06/29/2021 09:56:49 - INFO - __main__ -   Epoch: 0023 | Time: 0m_11s | train_loss: 0.461 | val_loss: 0.545
+06/29/2021 09:56:49 - INFO - __main__ -   🔥 val metrics 🔥 {'acc': 0.7453703703703703, 'f1': 0.7158068485977731, 'precision': 0.7160487913912572, 'recall': 0.7155692438402719}
+06/29/2021 09:56:49 - INFO - __main__ -   	current patience value: 10/10
+06/29/2021 09:56:49 - INFO - __main__ -   	--STOPPING EARLY
+06/29/2021 09:56:49 - INFO - __main__ -   load checkpoint from /mnt/backup/panda/GermEval2021/models/cv_fold_B_monotask/bert-base-multilingual-cased/trg_fc256_lr0.005_frozen
+06/29/2021 09:56:49 - INFO - __main__ -   load model weights from checkpoint in /mnt/backup/panda/GermEval2021/models/cv_fold_B_monotask/bert-base-multilingual-cased/trg_fc256_lr0.005_frozen
+06/29/2021 09:56:53 - INFO - training_utils.train_loop -   postprocessing targets..
+06/29/2021 09:56:53 - INFO - training_utils.train_loop -   postprocessing predictions..
+06/29/2021 09:56:53 - INFO - __main__ -   best_val_loss: 0.544
+06/29/2021 09:56:53 - INFO - __main__ -   🔥 best validation metrics 🔥 {'acc': 0.7530864197530864, 'f1': 0.7314323607427056, 'precision': 0.7273169939944815, 'recall': 0.7379779099405268}
