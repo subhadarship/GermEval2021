@@ -140,7 +140,7 @@ if __name__ == "__main__":
                 progress_bar=True,
                 device=device
             )
-        elif args.model_name in ['bert-base-uncased', 'bert-base-multilingual-cased']:
+        elif args.model_name in ['bert-base-uncased', 'bert-base-multilingual-cased', 'bert-base-german-cased']:
             datasets_dict[split_name] = BertGermEvalDataset(
                 df=data_dfs_dict[split_name],
                 label_col_names=args.label_col_names.split(','),
@@ -183,7 +183,7 @@ if __name__ == "__main__":
             data_dict=checkpoint_dict['data_dict'],
             device=device,
         )
-    elif args.model_name in ['bert-base-uncased', 'bert-base-multilingual-cased']:
+    elif args.model_name in ['bert-base-uncased', 'bert-base-multilingual-cased', 'bert-base-german-cased']:
         model = load_bert_multitask_classification_model(
             model_name=args.model_name,
             model_hyperparams_dict=checkpoint_dict['model_hyperparams_dict'],
