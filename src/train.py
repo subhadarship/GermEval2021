@@ -72,7 +72,7 @@ if __name__ == "__main__":
             sos_token='<sos>',
             max_len=1000,
             batch_size=args.batch_size,
-            max_vocab_size=None,
+            max_vocab_size=args.max_vocab_size,
             device=device,
         )
     elif args.model_name in ['bert-base-uncased', 'bert-base-multilingual-cased', 'bert-base-german-cased']:
@@ -95,7 +95,7 @@ if __name__ == "__main__":
             sos_token=None,
             max_len=None,
             batch_size=args.batch_size,
-            max_vocab_size=None,
+            max_vocab_size=args.max_vocab_size,
             device=device,
         )
     else:
